@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Search | Input Element</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font: 2.5rem sans-serif;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #333;
+        /* overflow: hidden; */
+      }
+
+      .wrapper {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      img#google-name {
+        width: 350px;
+        margin: 0.5rem 0;
+      }
+
+      input {
+        width: 70%;
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        margin: 2.4rem 0;
+        border: none;
+      }
+
+      input:focus {
+        outline: none;
+      }
+      .users {
+        width: 70%;
+      }
+      .users__container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+      }
+      .user--cirlce {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #5f5f5f;
+        border-radius: 50%;
+        padding: 3px;
+      }
+
+      img:not(img#google-name) {
+        width: 40px;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <img id="google-name" src="./assets/google-logo.webp" alt="google logo" />
+      <input type="text" placeholder="Search Google or type a URL" />
+      <div class="users">
+        <div class="users__container">
+          <div class="user--cirlce">
+            <img src="./assets/google-g-logo.png" alt="google logo" />
+          </div>
+          <div class="user--cirlce">
+            <img src="./assets/gmail.png" alt="gmail logo" />
+          </div>
+          <div class="user--cirlce">
+            <img src="./assets/yahoo-logo.png" alt="yahoo logo" />
+          </div>
+          <div class="user--cirlce">
+            <img src="./assets/fiverr-logo.webp" alt="fiverr logo" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
