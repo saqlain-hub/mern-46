@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Model</title>
+    <style>
+      body {
+        margin: 30vh 0 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .margin {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        height: 250px;
+        background: sandybrown;
+        position: relative;
+      }
+      .margin p {
+        position: absolute;
+        top: -10px;
+        left: 5px;
+      }
+      .border {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        height: 190px;
+        background: green;
+        position: relative;
+      }
+      .border p {
+        position: absolute;
+        top: -12px;
+        left: 6px;
+      }
+      .padding {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 140px;
+        background: rebeccapurple;
+        position: relative;
+      }
+      .padding p {
+        position: absolute;
+        top: -5px;
+        left: 5px;
+      }
+      .content {
+        width: 130px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: gold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="margin">
+      <p>Margin - 10px</p>
+      <div class="border">
+        <p>Border - 2px</p>
+        <div class="padding">
+          <p>padding - 10px</p>
+          <div class="content">
+            <span>856 x 250</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
