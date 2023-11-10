@@ -1,14 +1,23 @@
-// import { useState } from "react";
-import FriendList from "./components/FriendList";
+import { useState } from "react";
 import "./App.css";
+import FriendList from "./components/FriendList";
+import AddFriend from "./components/AddFriend";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  console.log("app render");
+  const [friends, setFriends] = useState(["Bob", "Jane"]);
+
+  const addFriend = (e, friend) => {
+    e.preventDefault();
+    setFriends([...friends, friend]);
+  };
 
   return (
-    <div className="container">
-      <FriendList />
-    </div>
+    <>
+      <p className="friend-list">Friends List</p>
+      <AddFriend addFriend={addFriend} />
+      <FriendList friends={friends} />
+    </>
   );
 }
 
