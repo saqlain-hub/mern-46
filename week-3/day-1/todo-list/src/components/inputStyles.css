@@ -1,0 +1,64 @@
+h2 {
+  border-bottom: 2px solid seagreen;
+  padding-bottom: 0.5rem;
+  color: white;
+  text-align: center;
+}
+form {
+  width: 100%;
+  background: #333;
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  align-items: center;
+  padding: 1.8rem 1.3rem;
+  gap: 1rem;
+}
+form p {
+  flex: 6;
+}
+
+form input {
+  width: 100%;
+  padding: 0.7rem 0.5rem;
+  border-radius: 5px;
+  background: whitesmoke;
+  color: #333;
+  font: 1.2rem sans-serif;
+  border: none;
+}
+
+select {
+  flex: 2;
+  padding: 0.7rem 0.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: salmon;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+}
+
+select option {
+  background: gray;
+}
+
+button {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  font-size: 1.1rem;
+  background: darkslateblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form input:focus {
+  outline: none;
+}
+form label {
+  position: absolute;
+  left: -9999px;
+}
