@@ -1,4 +1,20 @@
+import { useState } from "react";
+import Swal from "sweetalert2";
+
 const Contact = () => {
+  const [email, setEmail] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Subscribed to Newsletter",
+      text: `Email: ${email} `,
+      icon: "success",
+      confirmButtonText: "Done",
+    });
+  };
+  const takeInput = (e) => {
+    setEmail(e.target.value);
+  };
   return (
     <section className="bg-bk-purple text-white py-20">
       <div className="container">
@@ -9,19 +25,25 @@ const Contact = () => {
           <h1 className="text-3xl text-center">
             Stay up-to-date with what we're doing
           </h1>
-          <div className="flex flex-col sm:flex-row gap-6 mt-8">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col sm:flex-row gap-6 mt-8"
+          >
             <input
-              type="text"
+              onChange={takeInput}
+              type="email"
               placeholder="Enter your email address"
               className="focus:outline-none text-bk-blue flex-1 px-2 py-3 rounded-md"
+              id="email"
+              autoComplete="off"
             />
             <button
-              type="button"
+              type="submit"
               className="btn bg-red-500  hover:bg-bk-white hover:text-black"
             >
               Contact Us
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </section>
