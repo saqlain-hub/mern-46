@@ -5,7 +5,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "Application Form",
+      title: "Contact Form",
       text: "Submitted Successfully",
       icon: "success",
       confirmButtonText: "OK",
