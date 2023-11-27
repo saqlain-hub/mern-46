@@ -36,11 +36,23 @@ router.get("/", async (req, res) => {
 
 router.post("/todos", function (req, res) {
   const todoItem = new Todo({
-    text: JSON.stringify(req.body.text),
-    status: JSON.stringify(req.body.status),
+    text: req.body.text,
+    status: req.body.status,
   });
   todoItem.save();
   res.json(req.body);
+});
+
+router.get("/taskcomplete", async (req, res) => {
+  const lists = await Todo.find({ status: true });
+  res.json(lists);
+});
+
+router.put("/todos/:id", async (req, res) => {
+  const { id } = req.params;
+  await Todo.updateOne({ id }, req.body);
+  const updatedTodo = await Todo.findById(id);
+  res.json(updatedTodo);
 });
 
 app.listen(PORT, () => {
