@@ -48,13 +48,6 @@ router.get("/taskcomplete", async (req, res) => {
   res.json(lists);
 });
 
-router.put("/todos/:id", async (req, res) => {
-  const { id } = req.params;
-  await Todo.updateOne({ id }, req.body);
-  const updatedTodo = await Todo.findById(id);
-  res.json(updatedTodo);
-});
-
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
