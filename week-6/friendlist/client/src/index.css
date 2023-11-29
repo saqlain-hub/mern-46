@@ -3,7 +3,29 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-[#333];
+  }
   li {
-    @apply border-b-2 border-red-300;
+    @apply text-left py-4;
+  }
+  p {
+    @apply text-white flex flex-col px-4 gap-2;
+  }
+  input {
+    @apply p-2 rounded-[5px] text-black;
+  }
+
+  input:focus {
+    @apply outline-none;
+  }
+  button {
+    @apply border-2 px-4 py-2 rounded-md;
+  }
+  button.deleteBtn {
+    @apply hover:bg-red-600;
+  }
+  button.editBtn {
+    @apply hover:bg-gray-500;
   }
 }

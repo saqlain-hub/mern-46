@@ -31,12 +31,18 @@ const FriendsSchema = new mongoose.Schema({
 const FriendsModel = new mongoose.model("FriendModel", FriendsSchema);
 
 router.all("/", (req, res) => {
-  res.json("Server Running :)");
+  res.status(200).json("Server Running :)");
 });
 
 router.get("/friend", async (req, res) => {
-  friendlist = await FriendsModel.find();
-  res.json(friendlist);
+  const friendlist = await FriendsModel.find();
+  res.status(200).json(friendlist);
+});
+
+router.get("/friend/:id", async (req, res) => {
+  const { id } = req.body;
+  const friend = await FriendsModel.findById(id);
+  res.status(200).json(friend);
 });
 
 router.post("/friend", async (req, res) => {
