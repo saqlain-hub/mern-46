@@ -1,33 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
-const ShowUsers = ({ friends, friendsFromDb, setFriendsFromDb }) => {
-  const users = [
-    {
-      id: 1,
-      name: "Saqlain Javed",
-      email: "saqlain@gmail.com",
-      contact: "031232434",
-    },
-    {
-      id: 2,
-      name: "Saqlain",
-      email: "saqi@gmail.com",
-      contact: "232434",
-    },
-  ];
+const ShowUsers = ({
+  friendsFromDb,
+  setFriendsFromDb,
+  setNameInput,
+  setEmailInput,
+  setContactInput,
+  setFriendId,
+}) => {
+  const handleLiClick = (name, email, contact, id) => {
+    setNameInput(name);
+    setEmailInput(email);
+    setContactInput(contact);
+    setFriendId(id);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/friend")
+      .then((res) => setFriendsFromDb(res.data));
+  }, []);
 
   const getFriends = () => {
-    setFriendsFromDb([...users, ...friends]);
-
-    // fetch("http://localhost:5000/friend").then((res) => console.log(res));
+    axios
+      .get("http://localhost:5000/friend")
+      .then((res) => setFriendsFromDb(res.data));
   };
 
   const handleDelete = () => {
     console.log("delete");
-  };
-  const handleEdit = () => {
-    console.log("edit");
   };
 
   return (
@@ -43,7 +47,18 @@ const ShowUsers = ({ friends, friendsFromDb, setFriendsFromDb }) => {
         {friendsFromDb.map((friend) => {
           return (
             (friend.name || friend.email) && (
-              <li className="flex items-center gap-2" key={friend.id}>
+              <li
+                onClick={() =>
+                  handleLiClick(
+                    friend.name,
+                    friend.email,
+                    friend.contact,
+                    friend._id
+                  )
+                }
+                className="flex items-center gap-2"
+                key={friend._id}
+              >
                 <div className="flex-1 text-white border-2 border-gray-300 py-4">
                   <p>Name: {friend.name}</p>
                   <p>email: {friend.email}</p>

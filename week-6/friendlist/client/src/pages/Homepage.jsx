@@ -15,6 +15,7 @@ const Homepage = ({
   setFriendsFromDb,
   showStatus,
   setShowStatus,
+  setFriendId,
 }) => {
   return (
     <div className="flex flex-col items-center gap-8 px-12 py-8 ">
@@ -27,6 +28,11 @@ const Homepage = ({
             friends={friends}
             friendsFromDb={friendsFromDb}
             setFriendsFromDb={setFriendsFromDb}
+            setNameInput={setNameInput}
+            setEmailInput={setEmailInput}
+            setContactInput={setContactInput}
+            setFriends={setFriends}
+            setFriendId={setFriendId}
           />
         </section>
         <section className="relative">

@@ -16,7 +16,7 @@ const AddUsers = ({
       name: nameInput,
       email: emailInput,
       contact: contactInput,
-      id: Math.random() * 1000 + 1,
+      id: Math.floor(Math.random() * 1000 + 1),
     };
     setFriends([...friends, friend]);
 
