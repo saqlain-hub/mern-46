@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const Users = ({ users, setUsers }) => {
+const Users = ({ users }) => {
   const navigate = useNavigate();
   function handleLiClick(id) {
     navigate(`/user/${id}`);
@@ -19,29 +19,33 @@ const Users = ({ users, setUsers }) => {
       <ul className=" mt-4">
         {users.map((user) => {
           return (
-            <li
-              onClick={() => handleLiClick(user.id)}
+            <div
+              className="border-2 cursor-pointer hover:bg-gray-100 mb-2  border-gray-300"
               key={user.id}
-              className="border-2 cursor-pointer hover:bg-gray-100 mb-2 p-4 border-gray-300 flex items-center justify-between"
             >
-              <div>
-                {user.name} - {user.email} - {user.age}
-              </div>
-              <div>
-                <Link
-                  to={`/update/${user.id}`}
-                  className="p-2 rounded-md mr-2 bg-gray-600 hover:bg-gray-700 text-white"
+              <li className="flex items-center justify-between p-4">
+                <div
+                  onClick={() => handleLiClick(user.id)}
+                  className="flex-1  "
                 >
-                  edit
-                </Link>
-                <Link
-                  to="/delete"
-                  className="p-2 rounded-md bg-red-500 hover:bg-red-600 text-white"
-                >
-                  delete
-                </Link>
-              </div>
-            </li>
+                  {user.name} - {user.email} - {user.age}
+                </div>
+                <div>
+                  <Link
+                    to={`/update/${user.id}`}
+                    className="p-2 rounded-md mr-2 bg-gray-600 hover:bg-gray-700 text-white"
+                  >
+                    edit
+                  </Link>
+                  <Link
+                    to={`/delete/${user.id}`}
+                    className="p-2 rounded-md bg-red-500 hover:bg-red-600 text-white"
+                  >
+                    delete
+                  </Link>
+                </div>
+              </li>
+            </div>
           );
         })}
       </ul>
