@@ -6,9 +6,6 @@
   body {
     @apply bg-[#333];
   }
-  li {
-    @apply text-left py-4;
-  }
   p {
     @apply text-white flex flex-col gap-2;
   }

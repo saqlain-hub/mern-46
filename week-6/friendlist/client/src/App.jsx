@@ -5,6 +5,7 @@ import UpdateUser from "./pages/UpdateUser";
 import { useState } from "react";
 import NotFound from "./pages/NotFound";
 import User from "./pages/User";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [users, setUsers] = useState([
@@ -13,6 +14,8 @@ function App() {
   ]);
   return (
     <>
+      <Navbar />
+
       <Routes>
         <Route path="/" element={<Users users={users} setUsers={setUsers} />} />
         <Route path="/user/:id" element={<User users={users} />} />

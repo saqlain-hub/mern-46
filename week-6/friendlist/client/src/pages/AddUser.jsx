@@ -35,7 +35,7 @@ const AddUser = ({ users, setUsers }) => {
   }
 
   return (
-    <div className="container rounded-md mx-auto bg-gray-500 mt-24 py-12 px-12">
+    <div className="container w-[85%] rounded-md mx-auto bg-gray-500 my-20 overflow-hidden py-12 px-12">
       <h2 className="mb-8 bg-indigo-400 text-white rounded-md py-2 text-center text-2xl">
         Add Friend to the List
       </h2>

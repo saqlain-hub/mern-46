@@ -6,7 +6,7 @@ const Users = ({ users }) => {
     navigate(`/user/${id}`);
   }
   return (
-    <div className="container rounded-md mx-auto bg-white mt-24 py-12 px-12">
+    <div className="container w-[85%] rounded-md mx-auto bg-white mt-24 py-12 px-12">
       <h2 className="mb-8 bg-gray-500 text-white rounded-md py-2 text-center text-2xl">
         Friends List
       </h2>
