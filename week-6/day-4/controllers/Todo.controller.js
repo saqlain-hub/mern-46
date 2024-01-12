@@ -7,7 +7,7 @@ const {
 } = require("../services/Todo.service");
 
 exports.GetTodo = catchAsyncError(async (req, res, next) => {
-  throw new CustomError("not found", 404);
+  // throw new CustomError("not found", 404);
   const todo = await getTodo();
   res.json(todo);
 });

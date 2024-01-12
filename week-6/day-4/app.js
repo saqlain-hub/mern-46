@@ -11,6 +11,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/todo", todoRoutes);
-app.use(handleError);
+// app.use(handleError);
 
 module.exports = app; // default export
