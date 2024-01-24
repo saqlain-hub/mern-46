@@ -32,6 +32,7 @@ app.get("/api/users", (req, res) => {
   return res.send(mockUsers);
 });
 
+// POST Request
 app.post("/api/users", (req, res) => {
   console.log(req.body);
   const { body } = req;
@@ -59,6 +60,24 @@ app.get("/api/products", (req, res) => {
   res.send([{ id: 123, name: "chicken breast", price: 240 }]);
 });
 
+app.put("/api/users/:id", (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+
+  const parsedId = parseInt(id);
+
+  if (isNaN(parsedId)) return res.sendStatus(400);
+
+  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
+
+  if (findUser === -1) return sendStatus(404);
+
+  mockUsers[findUserIndex] = { id: parsedId, ...body };
+  return res.sendStatus(200);
+});
+
 app.listen(PORT, () => {
   console.log(`Running on Port ${PORT}`);
 });
@@ -74,3 +93,10 @@ app.listen(PORT, () => {
 
 //queryParams
 // localhost:3000/products?key=value&key2=value2
+
+//HTTP Requests
+// GET    200
+// POST   201
+// PUT
+// PATCH
+// DELETE
