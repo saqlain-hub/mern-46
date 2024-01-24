@@ -2,6 +2,8 @@ import express from "express";
 
 const app = express();
 
+app.use(express.json());
+
 const PORT = process.env.PORT || 3000;
 
 const mockUsers = [
@@ -10,6 +12,7 @@ const mockUsers = [
   { id: 3, username: "shahzad", displayName: "Shahzad" },
 ];
 
+// GET Requests
 app.get("/", (req, res) => {
   res.status(200).send({ msg: "Hello World" });
 });
@@ -21,10 +24,17 @@ app.get("/api/users", (req, res) => {
   } = req;
 
   // when filter and value are undefined
-  if (!filter && !value) return res.send(mockUsers);
+  // if (!filter && !value) return res.send(mockUsers);
 
   if (filter && value)
     return res.send(mockUsers.filter((user) => user[filter].includes(value)));
+
+  return res.send(mockUsers);
+});
+
+app.post("/api/users", (req, res) => {
+  console.log(req.body);
+  return res.send(201);
 });
 
 app.get("/api/users/:id", (req, res) => {
