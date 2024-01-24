@@ -5,8 +5,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const mockUsers = [
-  { id: 1, username: "saqlain", displayName: "saqlain" },
-  { id: 2, username: "shahzad", displayName: "shahzad" },
+  { id: 1, username: "saqlain", displayName: "Saqlain" },
+  { id: 2, username: "adil", displayName: "Adil" },
+  { id: 3, username: "shahzad", displayName: "Shahzad" },
 ];
 
 app.get("/", (req, res) => {
@@ -14,7 +15,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/users", (req, res) => {
-  res.send(mockUsers);
+  console.log(req.query);
+  const {
+    query: { filter, value },
+  } = req;
+
+  // when filter and value are undefined
+  if (!filter && !value) return res.send(mockUsers);
+
+  if (filter && value)
+    return res.send(mockUsers.filter((user) => user[filter].includes(value)));
 });
 
 app.get("/api/users/:id", (req, res) => {
@@ -37,6 +47,14 @@ app.listen(PORT, () => {
   console.log(`Running on Port ${PORT}`);
 });
 
+//endpoints
 // localhost:3000
 // localhost:3000/users
 // localhost:3000/products
+
+//req.params
+// localhost:3000/api/users/:id
+// localhost:3000/api/products/:id
+
+//queryParams
+// localhost:3000/products?key=value&key2=value2
