@@ -60,6 +60,7 @@ app.get("/api/products", (req, res) => {
   res.send([{ id: 123, name: "chicken breast", price: 240 }]);
 });
 
+// PUT request
 app.put("/api/users/:id", (req, res) => {
   const {
     body,
@@ -72,9 +73,25 @@ app.put("/api/users/:id", (req, res) => {
 
   const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
 
-  if (findUser === -1) return sendStatus(404);
+  if (findUserIndex === -1) return res.sendStatus(404);
 
   mockUsers[findUserIndex] = { id: parsedId, ...body };
+  return res.sendStatus(200);
+});
+
+// PATCH request
+app.patch("/api/users/:id", (req, res) => {
+  const {
+    body,
+    params: { id },
+  } = req;
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) return res.sendStatus(400);
+  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
+
+  if (findUserIndex === -1) return res.sendStatus(404);
+
+  mockUsers[findUserIndex] = { ...mockUsers[findUserIndex], ...body };
   return res.sendStatus(200);
 });
 
