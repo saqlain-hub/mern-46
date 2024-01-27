@@ -4,6 +4,24 @@ const app = express();
 
 app.use(express.json());
 
+// Middleware
+const loggingMiddleware = (req, res, next) => {
+  console.log(`${req.method} - ${req.url}`);
+  next();
+};
+
+const resolveIndexByUserId = (req, res, next) => {
+  const {
+    params: { id },
+  } = req;
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) return res.sendStatus(400);
+  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
+  if (findUserIndex === -1) return res.sendStatus(404);
+  req.findUserIndex = findUserIndex;
+  next();
+};
+
 const PORT = process.env.PORT || 3000;
 
 const mockUsers = [
@@ -61,21 +79,10 @@ app.get("/api/products", (req, res) => {
 });
 
 // PUT request
-app.put("/api/users/:id", (req, res) => {
-  const {
-    body,
-    params: { id },
-  } = req;
+app.put("/api/users/:id", resolveIndexByUserId, (req, res) => {
+  const { body, findUserIndex } = req;
 
-  const parsedId = parseInt(id);
-
-  if (isNaN(parsedId)) return res.sendStatus(400);
-
-  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
-
-  if (findUserIndex === -1) return res.sendStatus(404);
-
-  mockUsers[findUserIndex] = { id: parsedId, ...body };
+  mockUsers[findUserIndex] = { id: mockUsers[findUserIndex].id, ...body };
   return res.sendStatus(200);
 });
 
