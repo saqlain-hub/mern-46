@@ -87,34 +87,16 @@ app.put("/api/users/:id", resolveIndexByUserId, (req, res) => {
 });
 
 // PATCH request
-app.patch("/api/users/:id", (req, res) => {
-  const {
-    body,
-    params: { id },
-  } = req;
-  const parsedId = parseInt(id);
-  if (isNaN(parsedId)) return res.sendStatus(400);
-  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
-
-  if (findUserIndex === -1) return res.sendStatus(404);
+app.patch("/api/users/:id", resolveIndexByUserId, (req, res) => {
+  const { body, findUserIndex } = req;
 
   mockUsers[findUserIndex] = { ...mockUsers[findUserIndex], ...body };
   return res.sendStatus(200);
 });
 
 // DELETE Request
-app.delete("/api/users/:id", (req, res) => {
-  const {
-    params: { id },
-  } = req;
-
-  const parsedId = parseInt(id);
-
-  if (isNaN(parsedId)) return res.sendStatus(400);
-
-  const findUserIndex = mockUsers.findIndex((user) => user.id === parsedId);
-
-  if (findUserIndex === -1) return res.sendStatus(404);
+app.delete("/api/users/:id", resolveIndexByUserId, (req, res) => {
+  const { findUserIndex } = req;
 
   mockUsers.splice(findUserIndex, 1);
 
