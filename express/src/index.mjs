@@ -1,4 +1,5 @@
 import express from "express";
+import { query } from "express-validator";
 
 const app = express();
 
@@ -35,8 +36,8 @@ app.get("/", (req, res) => {
   res.status(200).send({ msg: "Hello World" });
 });
 
-app.get("/api/users", (req, res) => {
-  console.log(req.query);
+app.get("/api/users", query("filter").isString().notEmpty(), (req, res) => {
+  console.log(req);
   const {
     query: { filter, value },
   } = req;
@@ -62,14 +63,9 @@ app.post("/api/users", (req, res) => {
   return res.status(201).send(newUser);
 });
 
-app.get("/api/users/:id", (req, res) => {
-  console.log(req.params);
-  const parsedId = parseInt(req.params.id);
-  console.log(parsedId);
-  if (isNaN(parsedId)) {
-    return res.status(400).send({ msg: "bad request" });
-  }
-  const findUser = mockUsers.find((user) => user.id === parsedId);
+app.get("/api/users/:id", resolveIndexByUserId, (req, res) => {
+  const { findUserIndex } = req;
+  const findUser = mockUsers[findUserIndex];
   if (!findUser) return res.status(404).send({ msg: "User not found" });
   return res.send(findUser);
 });
