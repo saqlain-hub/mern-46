@@ -1,5 +1,12 @@
 import express from "express";
-import { query, validationResult, body } from "express-validator";
+import {
+  query,
+  validationResult,
+  body,
+  matchedData,
+  checkSchema,
+} from "express-validator";
+import { createUserValidationSchema } from "./utils/validationSchema.mjs";
 
 const app = express();
 
@@ -62,33 +69,21 @@ app.get(
 );
 
 // POST Request
-app.post(
-  "/api/users",
-  [
-    body("username")
-      .notEmpty()
-      .withMessage("Username cannot be empty")
-      .isLength({ min: 5, max: 32 })
-      .withMessage("Username must be 5-32 characters")
-      .isString()
-      .withMessage("username must be string"),
-  ],
-  (req, res) => {
-    const result = validationResult(req);
-    console.log(result);
+app.post("/api/users", checkSchema(createUserValidationSchema), (req, res) => {
+  const result = validationResult(req);
+  console.log(result);
 
-    if (!result.isEmpty())
-      return res.status(400).send({ error: result.array() });
+  if (!result.isEmpty()) return res.status(400).send({ error: result.array() });
 
-    const { body } = req;
-    const newUser = {
-      id: mockUsers[mockUsers.length - 1].id + 1,
-      ...body,
-    };
-    mockUsers.push(newUser);
-    return res.status(201).send(newUser);
-  }
-);
+  const data = matchedData(req);
+
+  const newUser = {
+    id: mockUsers[mockUsers.length - 1].id + 1,
+    ...data,
+  };
+  mockUsers.push(newUser);
+  return res.status(201).send(newUser);
+});
 
 app.get("/api/users/:id", resolveIndexByUserId, (req, res) => {
   const { findUserIndex } = req;
