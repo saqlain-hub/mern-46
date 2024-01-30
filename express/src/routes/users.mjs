@@ -12,7 +12,7 @@ import resolveIndexByUserId from "../utils/resolveIndex.mjs";
 const router = Router();
 
 // GET Request  /
-router.get("/", (req, res) => {
+router.get("/api", (req, res) => {
   res.status(200).send({ msg: "Hello World" });
 });
 // GET Request  /api/users

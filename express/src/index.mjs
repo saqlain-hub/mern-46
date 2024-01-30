@@ -17,6 +17,11 @@ app.listen(PORT, () => {
   console.log(`Running on Port ${PORT}`);
 });
 
+app.get("/", (req, res) => {
+  res.cookie("hello", "world", { maxAge: 6000 * 60 * 2 });
+  res.status(201).send({ msg: "Hello" });
+});
+
 //endpoints
 // localhost:3000
 // localhost:3000/users
