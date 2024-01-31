@@ -1,0 +1,18 @@
+// previous code
+ gloabl state
+ console.log(store.getState());
+ store.subscribe(() => {
+   history.push(store.getState());
+   console.log(history);
+ });
+
+if (action.type === inc) {
+    // immutability --- state should not be changed directly
+  }
+  if (action.type === dec) {
+    return { amount: state.amount - 1 };
+  }
+  if (action.type === incByAmt) {
+    return { amount: state.amount + action.payload };
+  }
+  return state;
