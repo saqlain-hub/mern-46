@@ -10,6 +10,12 @@ function reducer(state = { amount: 1 }, action) {
     // immutability --- state should not be changed directly
     return { amount: state.amount + 1 };
   }
+  if (action.type === "decrement") {
+    return { amount: state.amount - 1 };
+  }
+  if (action.type === "incrementByAmount") {
+    return { amount: state.amount + action.payload };
+  }
   return state;
 }
 
@@ -20,8 +26,21 @@ function reducer(state = { amount: 1 }, action) {
 //   console.log(history);
 // });
 
+// action creators
+function increment() {
+  return { type: "increment" };
+}
+
+function decrement() {
+  return { type: "decrement" };
+}
+
+function incrementByAmount(value) {
+  return { type: "incrementByAmount", payload: value };
+}
+
 setInterval(() => {
-  store.dispatch({ type: "increment" });
+  store.dispatch(incrementByAmount(5));
 }, 2000);
 
 // console.log(store.getState());
@@ -30,4 +49,8 @@ setInterval(() => {
  * 1. Single Source of Trush --- Global State
  * 2. Immutable Updates --- State read-only
  * 3. Reducer should be pure function -- no Side-effects
+ */
+
+/** Middleware
+ * Middleware is a software component that acts as an intermediary, facilitating communication, processing, or modifications between different components or layers of an application
  */
