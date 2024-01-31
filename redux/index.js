@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import logger from "redux-logger";
 import axios from "axios";
 import { thunk } from "redux-thunk";
@@ -12,10 +12,13 @@ const dec = "decrement";
 const incByAmt = "incrementByAmount";
 
 // Store
-const store = createStore(reducer, applyMiddleware(logger.default, thunk));
+const store = createStore(
+  combineReducers({ account: accountReducer, bonus: bonusReducer }),
+  applyMiddleware(logger.default, thunk)
+);
 
 // Reducer
-function reducer(state = { amount: 1 }, action) {
+function accountReducer(state = { amount: 1 }, action) {
   switch (action.type) {
     case init:
       return { amount: action.payload };
@@ -25,6 +28,16 @@ function reducer(state = { amount: 1 }, action) {
       return { amount: state.amount - 1 };
     case incByAmt:
       return { amount: state.amount + action.payload };
+    default:
+      return state;
+  }
+}
+
+function bonusReducer(state = { points: 0 }, action) {
+  switch (action.type) {
+    case incByAmt:
+      if (action.payload >= 100) return { points: state.points + 1 };
+
     default:
       return state;
   }
@@ -56,7 +69,8 @@ function incrementByAmount(value) {
 }
 
 setTimeout(() => {
-  store.dispatch(getUser(2));
+  //   store.dispatch(getUser(1));
+  store.dispatch(incrementByAmount(200));
 }, 2000);
 
 // console.log(store.getState());
