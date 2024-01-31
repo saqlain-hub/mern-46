@@ -1,5 +1,6 @@
 import { mockUsers } from "./constants.mjs";
-const resolveIndexByUserId = (req, res, next) => {
+import { products } from "./constants.mjs";
+export const resolveIndexByUserId = (req, res, next) => {
   const {
     params: { id },
   } = req;
@@ -11,4 +12,14 @@ const resolveIndexByUserId = (req, res, next) => {
   next();
 };
 
-export default resolveIndexByUserId;
+export const resolveIndexByProds = (req, res, next) => {
+  const {
+    params: { id },
+  } = req;
+  const parsedId = parseInt(id);
+  if (isNaN(parsedId)) return res.sendStatus(400);
+  const findProdIndex = products.findIndex((prod) => prod.id === parsedId);
+  if (findProdIndex === -1) return res.sendStatus(404);
+  req.findProdIndex = findProdIndex;
+  next();
+};

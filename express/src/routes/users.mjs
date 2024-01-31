@@ -7,7 +7,7 @@ import {
 } from "express-validator";
 import { mockUsers } from "../utils/constants.mjs";
 import { createUserValidationSchema } from "../utils/validationSchema.mjs";
-import resolveIndexByUserId from "../utils/resolveIndex.mjs";
+import { resolveIndexByUserId } from "../utils/resolveIndex.mjs";
 
 const router = Router();
 
