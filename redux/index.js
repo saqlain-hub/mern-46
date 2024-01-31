@@ -6,10 +6,15 @@ import { thunk } from "redux-thunk";
 const history = [];
 
 // action name constants
-const init = "init";
-const inc = "increment";
-const dec = "decrement";
-const incByAmt = "incrementByAmount";
+// const init = "account/init";
+const inc = "account/increment";
+const dec = "account/decrement";
+const incByAmt = "account/incrementByAmount";
+const getUserPending = "account/getUser/pending";
+const getUserFulfilled = "account/getUser/fulfilled";
+const getUserRejected = "account/getUser/rejected";
+
+const incBonus = "bonus/increment";
 
 // Store
 const store = createStore(
@@ -20,8 +25,12 @@ const store = createStore(
 // Reducer
 function accountReducer(state = { amount: 1 }, action) {
   switch (action.type) {
-    case init:
-      return { amount: action.payload };
+    case getUserFulfilled:
+      return { amount: action.payload, pending: false };
+    case getUserRejected:
+      return { ...state, error: action.error, pending: false };
+    case getUserPending:
+      return { ...state, pending: true };
     case inc:
       return { amount: state.amount + 1 };
     case dec:
@@ -35,25 +44,39 @@ function accountReducer(state = { amount: 1 }, action) {
 
 function bonusReducer(state = { points: 0 }, action) {
   switch (action.type) {
+    case incBonus:
+      return { points: state.points + 1 };
     case incByAmt:
       if (action.payload >= 100) return { points: state.points + 1 };
-
     default:
       return state;
   }
 }
 
 // Async API Call action creator
-function getUser(id) {
+function getUserAccount(id) {
   return async (dispatch, getState) => {
-    const { data } = await axios.get(`http://localhost:3000/acounts/${id}`);
-    dispatch(initUser(data.amount));
+    try {
+      dispatch(getAccountUserPending());
+      const { data } = await axios.get(`http://localhost:3000/accounts/${id}`);
+      dispatch(getAccountUserFulfilled(data.amount));
+    } catch (error) {
+      dispatch(getAccountUserRejected(error.message));
+    }
   };
 }
 
 // action creators
-function initUser(value) {
-  return { type: init, payload: value };
+function getAccountUserFulfilled(value) {
+  return { type: getUserFulfilled, payload: value };
+}
+
+function getAccountUserRejected(error) {
+  return { type: getUserRejected, error: error };
+}
+
+function getAccountUserPending() {
+  return { type: getUserPending };
 }
 
 function increment() {
@@ -68,9 +91,14 @@ function incrementByAmount(value) {
   return { type: incByAmt, payload: value };
 }
 
+function incrementBonus() {
+  return { type: incBonus };
+}
+
 setTimeout(() => {
-  //   store.dispatch(getUser(1));
-  store.dispatch(incrementByAmount(200));
+  store.dispatch(getUserAccount(1));
+  //   store.dispatch(incrementByAmount(200));
+  //   store.dispatch(incrementBonus());
 }, 2000);
 
 // console.log(store.getState());
