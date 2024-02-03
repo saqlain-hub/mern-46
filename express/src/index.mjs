@@ -1,18 +1,23 @@
 import express from "express";
 import routes from "./routes/index.mjs";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser("helloworld"));
+app.use(
+  session({
+    secret: "saqlain the dev",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 60000 * 60,
+    },
+  })
+);
 app.use(routes);
-
-// Middleware
-const loggingMiddleware = (req, res, next) => {
-  console.log(`${req.method} - ${req.url}`);
-  next();
-};
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,6 +26,9 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
+  console.log(req.session);
+  console.log(req.session.id);
+  req.session.visited = true;
   res.cookie("hello", "world", { maxAge: 6000 * 60 * 2, signed: true });
   res.status(201).send({ msg: "Hello" });
 });
