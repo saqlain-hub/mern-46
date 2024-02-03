@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser("helloworld"));
 app.use(routes);
 
 // Middleware
@@ -21,7 +21,7 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.cookie("hello", "world", { maxAge: 6000 * 60 * 2 });
+  res.cookie("hello", "world", { maxAge: 6000 * 60 * 2, signed: true });
   res.status(201).send({ msg: "Hello" });
 });
 

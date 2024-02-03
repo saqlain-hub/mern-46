@@ -7,7 +7,11 @@ const router = Router();
 router.get("/api/products", (req, res) => {
   console.log(req.headers.cookie);
   console.log(req.cookies);
-  res.send([{ id: 123, name: "chicken breast", price: 240 }]);
+  console.log(req.signedCookies);
+  if (req.signedCookies.hello && req.signedCookies.hello === "world")
+    return res.send([{ id: 123, name: "chicken breast", price: 240 }]);
+
+  return res.send({ msg: "Sorry. You need the correct cookie" });
 });
 
 router.get("/api/prods", (req, res) => {
