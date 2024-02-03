@@ -16,7 +16,9 @@ router.get("/api/prods", (req, res) => {
   }
   return res.status(200).send(products);
 });
-
+router.get("/api/prods/:id", (req, res) => {
+  console.log("Product with id");
+});
 router.post("/api/prods", (req, res) => {
   const { name, price } = req.body;
 
