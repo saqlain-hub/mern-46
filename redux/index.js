@@ -10,6 +10,7 @@ const history = [];
 const inc = "account/increment";
 const dec = "account/decrement";
 const incByAmt = "account/incrementByAmount";
+const decByAmt = "account/decrementByAmount";
 const getUserPending = "account/getUser/pending";
 const getUserFulfilled = "account/getUser/fulfilled";
 const getUserRejected = "account/getUser/rejected";
@@ -37,6 +38,8 @@ function accountReducer(state = { amount: 1 }, action) {
       return { amount: state.amount - 1 };
     case incByAmt:
       return { amount: state.amount + action.payload };
+    case decByAmt:
+      return { amount: state.amount - action.payload };
     default:
       return state;
   }
@@ -93,6 +96,10 @@ function incrementByAmount(value) {
 
 function incrementBonus() {
   return { type: incBonus };
+}
+
+function decrementByAmount(value) {
+  return { type: decByAmt, payload: value };
 }
 
 setTimeout(() => {
