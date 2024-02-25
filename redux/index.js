@@ -103,8 +103,9 @@ function decrementByAmount(value) {
 }
 
 setTimeout(() => {
-  store.dispatch(getUserAccount(1));
+  // store.dispatch(getUserAccount(1));
   //   store.dispatch(incrementByAmount(200));
+  store.dispatch(decrementByAmount(5));
   //   store.dispatch(incrementBonus());
 }, 2000);
 
