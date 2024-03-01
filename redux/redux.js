@@ -18,3 +18,5 @@ store.subscribe(() => {
 });
 
 store.dispatch({ type: "increment" });
+
+console.log(store.getState());
