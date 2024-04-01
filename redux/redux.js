@@ -19,11 +19,3 @@ store.subscribe(() => {
 
 store.dispatch({ type: "increment" });
 
-console.log(store.getState());
-console.log(store.getState());
-console.log(store.getState());
-console.log(store.getState());
-console.log(store.getState());
-console.log(store.getState());
-console.log(store.getState());
-console.log(store.getState());
