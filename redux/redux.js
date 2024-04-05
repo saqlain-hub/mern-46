@@ -1,7 +1,9 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
 
 // store
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(logger.default));
+const history = [];
 
 // reducer for createStore method
 // a callback function that will be called when createStore() is invoked
@@ -14,8 +16,13 @@ function reducer(state = { amount: 1 }, action) {
 }
 
 // global state
-console.log(store.getState());
+// console.log(store.getState());
 
-store.dispatch({ type: "increment" });
+// store.subscribe(() => {
+//   history.push(store.getState());
+//   console.log(history);
+// });
 
-console.log(store.getState());
+setInterval(() => {
+  store.dispatch({ type: "increment" });
+}, 2000);

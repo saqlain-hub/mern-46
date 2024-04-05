@@ -1,0 +1,8 @@
+Three principles of Redux
+1. Single Source of Truth  -  Global State
+2. Immutable Updates  -  State should be read-only
+3. Reducer should be pure functions  -  No side-effects
+
+
+What is a middleware?
+Middleware, in the context of software development, refers to a piece of software that sits between two or more applications or systems and facilitates communication or data exchange between them. It acts as an intermediary, often providing services such as data transformation, routing, logging, authentication, or authorization. Middleware enables interoperability and integration between different software components or systems.

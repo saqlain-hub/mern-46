@@ -46,3 +46,4 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
 In this example, the middleware function logs a message to the console every time a request is made to the server. It then calls the next() function to pass control to the next middleware function in the chain. If next() is not called within a middleware function, the request-response cycle can be terminated prematurely.
+
