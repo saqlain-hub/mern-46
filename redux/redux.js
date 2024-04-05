@@ -12,6 +12,14 @@ function reducer(state = { amount: 1 }, action) {
     // immutability -- do not mutate state and return a copy
     return { amount: state.amount + 1 };
   }
+  if (action.type === "decrement") {
+    // immutability -- do not mutate state and return a copy
+    return { amount: state.amount - 1 };
+  }
+  if (action.type === "incrementByAmount") {
+    // immutability -- do not mutate state and return a copy
+    return { amount: state.amount + action.payload };
+  }
   return state;
 }
 
@@ -24,5 +32,5 @@ function reducer(state = { amount: 1 }, action) {
 // });
 
 setInterval(() => {
-  store.dispatch({ type: "increment" });
+  store.dispatch({ type: "incrementByAmount", payload: 5 });
 }, 2000);
