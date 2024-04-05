@@ -31,6 +31,19 @@ function reducer(state = { amount: 1 }, action) {
 //   console.log(history);
 // });
 
+// Action creators
+function increment() {
+  return { type: "increment" };
+}
+
+function decrement() {
+  return { type: "decrement" };
+}
+
+function incrementByAmount(value) {
+  return { type: "incrementByAmount", payload: value };
+}
+
 setInterval(() => {
-  store.dispatch({ type: "incrementByAmount", payload: 5 });
+  store.dispatch(incrementByAmount(5));
 }, 2000);
