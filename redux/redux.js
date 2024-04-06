@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import axios from "axios";
 
 // action name constants
+const init = "init";
 const inc = "increment";
 const dec = "decrement";
 const incByAmt = "incrementByAmount";
@@ -13,18 +15,17 @@ const history = [];
 // reducer for createStore method
 // a callback function that will be called when createStore() is invoked
 function reducer(state = { amount: 1 }, action) {
-  if (action.type === inc) {
-    // immutability -- do not mutate state and return a copy
-    return { amount: state.amount + 1 };
+  switch (action.type) {
+    case inc:
+      return { amount: state.amount + 1 };
+
+    case dec:
+      return { amount: state.amount - 1 };
+
+    case incByAmt:
+      return { amount: state.amount + action.payload };
   }
-  if (action.type === dec) {
-    // immutability -- do not mutate state and return a copy
-    return { amount: state.amount - 1 };
-  }
-  if (action.type === incByAmt) {
-    // immutability -- do not mutate state and return a copy
-    return { amount: state.amount + action.payload };
-  }
+
   return state;
 }
 
@@ -37,6 +38,10 @@ function reducer(state = { amount: 1 }, action) {
 // });
 
 // Action creators
+function initUser() {
+  return { type: init };
+}
+
 function increment() {
   return { type: inc };
 }
