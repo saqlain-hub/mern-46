@@ -16,6 +16,9 @@ const history = [];
 // a callback function that will be called when createStore() is invoked
 function reducer(state = { amount: 1 }, action) {
   switch (action.type) {
+    case init:
+      return { amount: action.payload };
+
     case inc:
       return { amount: state.amount + 1 };
 
@@ -24,9 +27,9 @@ function reducer(state = { amount: 1 }, action) {
 
     case incByAmt:
       return { amount: state.amount + action.payload };
+    default:
+      return state;
   }
-
-  return state;
 }
 
 // global state
@@ -38,8 +41,8 @@ function reducer(state = { amount: 1 }, action) {
 // });
 
 // Action creators
-function initUser() {
-  return { type: init };
+function initUser(value) {
+  return { type: init, payload: value };
 }
 
 function increment() {
@@ -55,5 +58,14 @@ function incrementByAmount(value) {
 }
 
 setInterval(() => {
-  store.dispatch(decrement());
+  store.dispatch(initUser(500));
 }, 2000);
+
+async function getUser() {
+  const { data } = await axios.get("http://localhost:3000/accounts/1");
+  console.log(data);
+}
+
+getUser();
+
+console.log("April Commit");
