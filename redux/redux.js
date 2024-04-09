@@ -67,5 +67,3 @@ async function getUser() {
 }
 
 getUser();
-
-console.log("April Commit");
