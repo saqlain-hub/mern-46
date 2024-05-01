@@ -15,7 +15,10 @@ const App = () => {
     //   <section>Portfolio3</section>
     //   <section>Contact</section>
     // </div>
-    <Test />
+    <div>
+      <Test />
+      <Test />
+    </div>
   );
 };
 
