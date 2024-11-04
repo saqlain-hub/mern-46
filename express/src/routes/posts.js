@@ -52,6 +52,7 @@ router.post("/", (req, res, next) => {
 router.put("/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
+  const title = req.body.title;
 
   if (!post) {
     const error = new Error(`A post with the id of ${id} was not found`);
@@ -59,19 +60,24 @@ router.put("/:id", (req, res, next) => {
     return next(error);
   }
 
-  post.title = req.body.title;
+  if (!title) {
+    const error = new Error(`Please include a title to update`);
+    error.status = 400;
+    return next(error);
+  }
+  post.title = title;
   res.status(200).json(posts);
 });
 
 // Delete Post
-router.delete("/:id", (req, res) => {
+router.delete("/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
 
   if (!post) {
-    return res
-      .status(404)
-      .json({ msg: `A post with the id of ${id} was not found` });
+    const error = new Error(`A post with the id of ${id} was not found`);
+    error.status = 404;
+    return next(error);
   }
 
   posts = posts.filter((post) => post.id !== id);
