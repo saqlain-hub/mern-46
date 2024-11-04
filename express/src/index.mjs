@@ -3,6 +3,10 @@ import routes from "./routes/index.mjs";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 
+// If an error for import not defined is thrown add this line in the package.json file <// "type": "module">
+// Instead of using nodemon we are using node --watch in this the upcoming tutorials <// node --watch ./src/index"
+// nodemon script <// "dev": "nodemon ./src/index.js" //>
+
 const app = express();
 
 app.use(express.json());

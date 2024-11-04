@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.mjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.mjs",
-    "dev": "nodemon ./src/index.mjs"
+    "start": "node ./src/server.js",
+    "dev": "node --watch --env-file=./src/.env ./src/server"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,5 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
-  },
-  "type": "module"
+  }
 }
